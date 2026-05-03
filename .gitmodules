@@ -1,0 +1,6 @@
+[submodule "backend"]
+	path = backend
+	url = https://github.com/zAxn1e/bigwork-backend.git
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/zAxn1e/bigwork-frontend.git
