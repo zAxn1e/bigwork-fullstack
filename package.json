@@ -9,9 +9,10 @@
     "prisma:generate": "cd backend && npx prisma generate",
     "prisma:migrate": "cd backend && npx prisma migrate dev",
     "prisma:deploy": "cd backend && npx prisma migrate deploy",
-    "prisma:seed": "cd backend && npx prisma db seed",
-
-    "setup": "git submodule update --init --recursive && npm run install:all && npm run prisma:generate && npm run prisma:migrate && npm run prisma:seed",
+    "prisma:seed": "cd backend && npm run db:seed",
+    
+    "prisma:setup": "npm run prisma:generate && npm run prisma:deploy && npm run prisma:seed",
+    "setup": "git submodule update --init --recursive && npm run install:all && npm run prisma:generate && npm run prisma:deploy && npm run prisma:seed",
     "clean": "npx rimraf frontend/node_modules backend/node_modules",
     
     "install:frontend": "npm --prefix frontend ci",
