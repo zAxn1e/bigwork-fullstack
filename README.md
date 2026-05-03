@@ -28,7 +28,7 @@ bigwork-main/
 ### 1. Clone โปรเจกต์ (รวม submodules)
 
 ```bash
-git clone --recurse-submodules <your-repo-url>
+git clone --recurse-submodules https://github.com/zAxn1e/bigwork-fullstack.git
 cd bigwork-main
 ```
 
@@ -186,7 +186,7 @@ npm run clean
 ## 💡 Workflow แนะนำ
 
 ```bash
-git clone --recurse-submodules <repo>
+git clone --recurse-submodules https://github.com/zAxn1e/bigwork-fullstack.git
 cd bigwork-main
 
 npm run setup
