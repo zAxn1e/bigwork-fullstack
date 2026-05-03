@@ -1,6 +1,6 @@
 # Bigwork Project
 
-โปรเจกต์ Fullstack ที่แยก **Frontend** และ **Backend** ออกจากกัน (ใช้ Git Submodule) และมี root project สำหรับควบคุมทั้งหมด
+โปรเจกต์ Fullstack ที่แยก **Frontend** และ **Backend** ออกจากกัน (ใช้ Git Submodule) และมี Root project สำหรับควบคุมทั้งหมด
 
 ---
 
@@ -9,7 +9,7 @@
 ```text
 bigwork-main/
 ├── frontend/   # Frontend (เช่น Vite / React)
-├── backend/    # Backend (Node.js + Prisma)
+├── backend/    # Backend (Node.js + Express.js + Prisma ORM)
 ├── package.json (ตัวควบคุมหลัก)
 ```
 
@@ -23,107 +23,76 @@ bigwork-main/
 
 ---
 
-## 🚀 ขั้นตอนการติดตั้งครั้งแรก
+## 🚀 ขั้นตอนการติดตั้ง (แนะนำใช้วิธีนี้)
 
-### 1. Clone โปรเจกต์ (รวม submodules)
+### 1. Clone โปรเจกต์
 
 ```bash
 git clone --recurse-submodules https://github.com/zAxn1e/bigwork-fullstack.git
 cd bigwork-main
 ```
 
-ถ้า clone มาแล้วแต่ยังไม่มี submodule:
+---
+
+### 2. Setup ทั้งหมด (แนะนำ)
 
 ```bash
-git submodule update --init --recursive
+npm run setup
 ```
+
+👉 คำสั่งนี้จะ:
+
+* โหลด submodules
+* copy `.env.example` → `.env` (ถ้ายังไม่มี)
+* ติดตั้ง dependencies
+* generate Prisma client
+* migrate database
+* seed ข้อมูล
 
 ---
 
-## 🔐 ตั้งค่า Environment Variables (สำคัญมาก)
+## 🔐 การตั้งค่า `.env` (สำคัญมาก)
 
-⚠️ ต้องตั้งค่า `.env` ก่อนรันโปรเจกต์
+แม้ระบบจะ copy `.env` ให้อัตโนมัติแล้ว
+👉 **ต้องแก้ค่า `DATABASE_URL` ให้ถูกต้องด้วยตนเอง**
 
 ---
 
 ## 🗄️ Backend (.env)
 
-เข้าไปที่โฟลเดอร์ backend:
+ไฟล์อยู่ที่:
 
-```bash
-cd backend
-cp .env.example .env
+```text
+backend/.env
 ```
 
-แก้ไข `.env`:
+ตัวอย่าง:
 
 ```env
-# Application
-POSTGRES_PORT=5432
-PORT=3000
-OPENAPI_SERVER_URL=http://localhost:3000
-OPENAPI_SERVER_URLS=http://localhost:3000
-
-# Database (Prisma + PostgreSQL)
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/bigwork_mini?schema=public"
-
-# Internal API Key Security
-INTERNAL_API_KEY=your-api-key-here
-API_KEY_REQUIRED=true
-
-# JWT Authentication
-JWT_SECRET=change-this-jwt-secret
-JWT_EXPIRES_IN=7d
-
-# Local Media Storage
-MEDIA_BASE_DIR=media
-MAX_UPLOAD_FILE_SIZE_MB=5
-
-# Media Processing
-WEBP_QUALITY=95
-THUMBNAIL_WIDTH=320
+DATABASE_URL="postgresql://postgres:password@localhost:5432/bigwork_mini?schema=public"
 ```
 
-👉 ตรวจสอบ:
+👉 สิ่งที่ต้องเช็ค:
 
-* PostgreSQL ต้องรันอยู่
-* มี database ชื่อ `bigwork_mini`
+* username / password ถูกต้อง
+* database มีอยู่จริง (เช่น `bigwork_mini`)
+* PostgreSQL รันอยู่
 
 ---
 
 ## 🌐 Frontend (.env)
 
-```bash
-cd ../frontend
-cp .env.example .env
+ไฟล์อยู่ที่:
+
+```text
+frontend/.env
 ```
 
-แก้ไข:
+ตัวอย่าง:
 
 ```env
 VITE_API_BASE_URL=http://localhost:3000
 VITE_API_KEY=your-api-key-here
-```
-
-👉 `VITE_API_BASE_URL` ต้องชี้ไป backend
-
----
-
-## 📥 ติดตั้ง Dependencies
-
-กลับมาที่ root:
-
-```bash
-npm run install:all
-```
-
----
-
-## 🗄️ ตั้งค่า Database (Prisma)
-
-```bash
-npm run prisma:generate
-npm run prisma:migrate
 ```
 
 ---
@@ -131,7 +100,7 @@ npm run prisma:migrate
 ## ▶️ รันโปรเจกต์
 
 ```bash
-npm run dev
+npm run start
 ```
 
 จะรัน:
@@ -159,23 +128,22 @@ npm run clean
 
 ## 📌 คำสั่งที่ใช้บ่อย
 
-| คำสั่ง                    | ความหมาย                                 |
-| ------------------------- | ---------------------------------------- |
-| `npm run setup`           | setup ทั้งหมด (clone + install + prisma) |
-| `npm run prisma:setup`    | setup prisma ทั้งหมด (prisma migrate + db seed) |
-| `npm run install:all`     | ติดตั้ง dependencies                     |
-| `npm run prisma:deploy`   | migrate database (deploy)                   |
-| `npm run prisma:generate` | generate Prisma client                   |
-| `npm run start`           | รัน frontend + backend                   |
-| `npm run pull`            | อัปเดต submodule                         |
-| `npm run clean`           | ลบ node_modules                          |
+| คำสั่ง                  | ความหมาย                                  |
+| ----------------------- | ----------------------------------------- |
+| `npm run setup`         | setup ทั้งหมดแบบอัตโนมัติ                 |
+| `npm run prisma:setup`  | setup database (generate + deploy + seed) |
+| `npm run install:all`   | ติดตั้ง dependencies                      |
+| `npm run prisma:deploy` | migrate database                          |
+| `npm run dev`           | รัน frontend + backend                    |
+| `npm run pull`          | อัปเดต submodule                          |
+| `npm run clean`         | ลบ node_modules                           |
 
 ---
 
 ## ⚠️ ข้อควรระวัง
 
 * ❌ ห้าม commit `.env`
-* ✅ ใช้ `.env.example` เป็น template
+* ✅ ต้องแก้ `DATABASE_URL` ให้ถูกต้องก่อนใช้งาน
 
 ---
 
