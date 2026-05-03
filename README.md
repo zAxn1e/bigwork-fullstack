@@ -162,10 +162,11 @@ npm run clean
 | คำสั่ง                    | ความหมาย                                 |
 | ------------------------- | ---------------------------------------- |
 | `npm run setup`           | setup ทั้งหมด (clone + install + prisma) |
+| `npm run prisma:setup`    | setup prisma ทั้งหมด (prisma migrate + db seed) |
 | `npm run install:all`     | ติดตั้ง dependencies                     |
-| `npm run prisma:migrate`  | migrate database (dev)                   |
+| `npm run prisma:deploy`   | migrate database (deploy)                   |
 | `npm run prisma:generate` | generate Prisma client                   |
-| `npm run dev`             | รัน frontend + backend                   |
+| `npm run start`           | รัน frontend + backend                   |
 | `npm run pull`            | อัปเดต submodule                         |
 | `npm run clean`           | ลบ node_modules                          |
 
@@ -175,11 +176,6 @@ npm run clean
 
 * ❌ ห้าม commit `.env`
 * ✅ ใช้ `.env.example` เป็น template
-* 🚫 production ห้ามใช้ `prisma migrate dev` ให้ใช้:
-
-  ```bash
-  npm run prisma:deploy
-  ```
 
 ---
 
