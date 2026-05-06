@@ -14,7 +14,7 @@
     
     "prisma:setup": "npm run prisma:reset && npm run prisma:generate && npm run prisma:deploy && npm run prisma:seed",
     "env:setup": "node scripts/env-copy.js",
-    "setup": "git submodule update --init --recursive && npm run env:setup && npm run install:all && npm run prisma:generate && npm run prisma:deploy && npm run prisma:seed",
+    "setup": "git submodule update --init --recursive && npm run env:setup && npm run install:all && npm run prisma:setup",
     "clean": "npx rimraf frontend/node_modules backend/node_modules",
     
     "install:frontend": "npm --prefix frontend ci",
