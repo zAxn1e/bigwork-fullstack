@@ -30,6 +30,7 @@ bigwork-main/
 ```bash
 git clone --recurse-submodules https://github.com/zAxn1e/bigwork-fullstack.git
 cd bigwork-main
+npm install
 ```
 
 ---
