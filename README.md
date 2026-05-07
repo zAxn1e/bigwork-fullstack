@@ -154,6 +154,7 @@ npm run clean
 git clone --recurse-submodules https://github.com/zAxn1e/bigwork-fullstack.git
 cd bigwork-main
 
+npm install
 npm run setup
 npm run dev
 ```
