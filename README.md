@@ -8,9 +8,9 @@
 
 ```text
 bigwork-main/
-├── frontend/   # Frontend (เช่น Vite / React)
+├── frontend/   # Frontend (Vite + React)
 ├── backend/    # Backend (Node.js + Express.js + Prisma ORM)
-├── package.json (ตัวควบคุมหลัก)
+├── package.json # Main Controller
 ```
 
 ---
@@ -23,7 +23,7 @@ bigwork-main/
 
 ---
 
-## 🚀 ขั้นตอนการติดตั้ง (แนะนำใช้วิธีนี้)
+## 🚀 ขั้นตอนการติดตั้ง
 
 ### 1. Clone โปรเจกต์
 
@@ -35,7 +35,7 @@ npm install
 
 ---
 
-### 2. Setup ทั้งหมด (แนะนำ)
+### 2. Setup ทั้งหมด
 
 ```bash
 npm run setup
